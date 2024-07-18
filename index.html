@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台灣大哥大人資機器人</title>
+    <style>
+        body {
+            background: linear-gradient(orange, white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            padding: 5% 0; /* 增加上下邊距 */
+        }
+        #chat-container {
+            width: 400px;
+            height: 80%; /* 調整對話框高度 */
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            margin: auto; /* 居中顯示 */
+        }
+        #header {
+            text-align: center;
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        #header img {
+            max-width: 100px;
+            margin-bottom: 10px;
+        }
+        #header h1 {
+            margin: 0;
+            font-size: 20px;
+        }
+        #chat-box {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ddd;
+        }
+        #input-container {
+            display: flex;
+        }
+        #input-box {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-top: 1px solid #ddd;
+        }
+        #send-button {
+            padding: 10px;
+            border: none;
+            background: orange;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="header">
+            <img src="台灣大哥大logo.jpg" alt="Logo">
+            <h1>台灣大哥大人資機器人</h1>
+        </div>
+        <div id="chat-box"></div>
+        <div id="input-container">
+            <input type="text" id="input-box" placeholder="輸入您的問題...">
+            <button id="send-button">送出</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('send-button').addEventListener('click', () => {
+            const inputBox = document.getElementById('input-box');
+            const chatBox = document.getElementById('chat-box');
+            const userMessage = inputBox.value.trim();
+            
+            if (userMessage) {
+                const userMessageElement = document.createElement('div');
+                userMessageElement.textContent = `您: ${userMessage}`;
+                chatBox.appendChild(userMessageElement);
+
+                let responseMessage = '對不起，我無法理解您的問題。';
+                if (userMessage.includes('病假規範')) {
+                    responseMessage = '病假規範是...';
+                } else if (userMessage.includes('薪資')) {
+                    responseMessage = '薪資相關資訊是...';
+                } else if (userMessage.includes('勞健保')) {
+                    responseMessage = '勞健保相關資訊是...';
+                }
+
+                const botMessageElement = document.createElement('div');
+                botMessageElement.textContent = `大哥大人資醬: ${responseMessage}`;
+                chatBox.appendChild(botMessageElement);
+
+                inputBox.value = '';
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>
+
